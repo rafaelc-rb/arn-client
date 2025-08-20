@@ -1,6 +1,6 @@
-# Aranet Provedor
+# Aranet Goiás
 
-Aplicativo móvel para acesso à plataforma **Aranet Go** - Sistema de gestão para provedores de internet.
+Aplicativo móvel para acesso à plataforma **Aranet GO** - Sistema de gestão para provedores de internet.
 
 ## 📱 Sobre o App
 

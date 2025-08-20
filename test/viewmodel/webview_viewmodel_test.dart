@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:aranet_provedor/viewmodel/webview_viewmodel.dart';
+import 'package:aranet_go/viewmodel/webview_viewmodel.dart';
 
 void main() {
   group('WebViewViewModel', () {

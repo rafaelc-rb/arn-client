@@ -1,5 +1,5 @@
-name: aranet_provedor
-description: "Aranet Go - Acesso móvel à plataforma Aranet Go através de WebView"
+name: aranet_go
+description: "Aranet GO - Acesso móvel à plataforma Aranet GO através de WebView"
 publish_to: 'none'
 version: 1.0.0
 

@@ -1,11 +1,11 @@
 {
-    "name": "Aranet Provedor",
-    "short_name": "Aranet",
+    "name": "Aranet Goiás",
+    "short_name": "Aranet Goiás",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#2196F3",
-    "description": "Aranet Go - Acesso móvel à plataforma Aranet Go através de WebView",
+    "description": "Aranet GO - Acesso móvel à plataforma Aranet GO através de WebView",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
