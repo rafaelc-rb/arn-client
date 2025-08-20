@@ -1,5 +1,5 @@
 name: aranet_provedor
-description: "Aranet Go - Sistema de gestão para provedores de internet. Acesso móvel à plataforma Aranet Go através de WebView."
+description: "Aranet Go - Acesso móvel à plataforma Aranet Go através de WebView"
 publish_to: 'none'
 version: 1.0.0
 

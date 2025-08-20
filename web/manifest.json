@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#2196F3",
-    "description": "Aranet Go - Sistema de gestão para provedores de internet",
+    "description": "Aranet Go - Acesso móvel à plataforma Aranet Go através de WebView",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
