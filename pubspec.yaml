@@ -1,0 +1,40 @@
+name: aranet_provedor
+description: "Aranet Go - Sistema de gestão para provedores de internet. Acesso móvel à plataforma Aranet Go através de WebView."
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  webview_flutter: ^4.13.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "logo.png"
+  remove_alpha_ios: true
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "logo.png"
+    background_color: "#ffffff"
+    theme_color: "#2196F3"
+  windows:
+    generate: true
+    image_path: "logo.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "logo.png"
