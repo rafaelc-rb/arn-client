@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cor da tela de carregamento: Cinza claro -->
+    <color name="loading_background">#F1F1F1</color>
+    <!-- Cor primária do tema: Cores da logo -->
+    <color name="primary_red">#E31C24</color>
+    <color name="primary_red_dark">#981A1C</color>
+</resources>

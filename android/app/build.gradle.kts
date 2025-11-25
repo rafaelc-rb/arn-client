@@ -30,24 +30,35 @@ android {
 
     defaultConfig {
         applicationId = "br.com.aranetprovedor.client"
-        minSdk = 21
-        targetSdk = 34
-        versionCode = 1
+        minSdk = flutter.minSdkVersion
+        targetSdk = 35
+        versionCode = 3
         versionName = "1.0.0"
     }
 
     signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
+        if (keystorePropertiesFile.exists()) {
+            val keyAlias = keystoreProperties["keyAlias"] as? String
+            val keyPassword = keystoreProperties["keyPassword"] as? String
+            val storeFile = keystoreProperties["storeFile"] as? String
+            val storePassword = keystoreProperties["storePassword"] as? String
+
+            if (keyAlias != null && keyPassword != null && storeFile != null && storePassword != null) {
+                create("release") {
+                    this.keyAlias = keyAlias
+                    this.keyPassword = keyPassword
+                    this.storeFile = file(storeFile)
+                    this.storePassword = storePassword
+                }
+            }
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            if (keystorePropertiesFile.exists() && signingConfigs.findByName("release") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

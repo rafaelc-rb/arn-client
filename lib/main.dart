@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'theme/app_theme.dart';
 import 'ui/webview_screen.dart';
 import 'viewmodel/webview_viewmodel.dart';
 
@@ -20,6 +22,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
       home: WebViewScreen(viewModel: viewModel),
     );
   }

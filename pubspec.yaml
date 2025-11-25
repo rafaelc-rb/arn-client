@@ -1,7 +1,7 @@
 name: aranet_go
 description: "Aranet GO - Acesso móvel à plataforma Aranet GO através de WebView"
 publish_to: "none"
-version: 1.0.0+1
+version: 1.0.0+3
 
 environment:
   sdk: ^3.8.1
@@ -15,7 +15,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
@@ -26,11 +26,14 @@ flutter_launcher_icons:
   image_path: "logo.png"
   remove_alpha_ios: true
   min_sdk_android: 21
+  # Remove o fundo branco/circular dos ícones Android
+  adaptive_icon_background: "#F1F1F1"
+  adaptive_icon_foreground: "logo.png"
   web:
     generate: true
     image_path: "logo.png"
     background_color: "#ffffff"
-    theme_color: "#2196F3"
+    theme_color: "#E31C24"
   windows:
     generate: true
     image_path: "logo.png"

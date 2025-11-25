@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Permitir conexões HTTPS -->
+    <!-- Configuração otimizada para Samsung e Xiaomi -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- Certificados do sistema (padrão) -->
+            <certificates src="system" />
+            <!-- Certificados instalados pelo usuário (importante para Samsung/Xiaomi) -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Configuração específica para o domínio -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">aranetgo.sgplocal.com.br</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
