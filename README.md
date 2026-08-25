@@ -25,7 +25,7 @@ O app redireciona para: `https://aranetgo.sgplocal.com.br/accounts/central/login
 
 ## 📋 Requisitos
 
-- Android 5.0+ (API 21)
+- Android 7.0+ (API 24)
 - iOS 11.0+
 - Conexão com internet
 

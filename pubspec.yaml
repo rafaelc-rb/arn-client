@@ -1,7 +1,7 @@
 name: aranet_go
 description: "Aranet GO - Acesso móvel à plataforma Aranet GO através de WebView"
 publish_to: "none"
-version: 1.0.0+3
+version: 1.0.1+4
 
 environment:
   sdk: ^3.8.1
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter: ^4.13.0
+  webview_flutter: ^4.14.1
 
 dev_dependencies:
   flutter_test:
@@ -25,7 +25,7 @@ flutter_launcher_icons:
   ios: true
   image_path: "logo.png"
   remove_alpha_ios: true
-  min_sdk_android: 21
+  min_sdk_android: 24
   # Remove o fundo branco/circular dos ícones Android
   adaptive_icon_background: "#F1F1F1"
   adaptive_icon_foreground: "logo.png"

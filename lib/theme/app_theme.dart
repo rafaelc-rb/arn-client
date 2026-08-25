@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
 
-/// Cores do tema baseadas na logo
-class AppColors {
-  // Cores primárias da logo
+/// Cores da marca, usadas para semear os esquemas de cores claro e escuro.
+abstract final class AppColors {
   static const Color primaryRed = Color(0xFFE31C24);
   static const Color primaryRedDark = Color(0xFF981A1C);
 
-  // Cor de fundo da tela de carregamento
+  /// Cor de fundo da tela enquanto a página carrega.
   static const Color loadingBackground = Color(0xFFF1F1F1);
 }
 
-/// Configuração do tema do aplicativo
-class AppTheme {
-  /// Tema claro do aplicativo
-  static ThemeData get lightTheme {
-    return ThemeData(
-      useMaterial3: true,
-      primaryColor: AppColors.primaryRed,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryRed,
-        primary: AppColors.primaryRed,
-      ),
-    );
-  }
+/// Configuração do tema do aplicativo.
+abstract final class AppTheme {
+  static ThemeData get lightTheme => _themeFor(Brightness.light);
 
-  /// Tema escuro do aplicativo (opcional, para uso futuro)
-  static ThemeData get darkTheme {
+  static ThemeData get darkTheme => _themeFor(Brightness.dark);
+
+  static ThemeData _themeFor(Brightness brightness) {
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: AppColors.primaryRed,
+      brightness: brightness,
+    );
     return ThemeData(
       useMaterial3: true,
-      primaryColor: AppColors.primaryRed,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryRed,
-        primary: AppColors.primaryRed,
-        brightness: Brightness.dark,
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: brightness == Brightness.light
+          ? AppColors.loadingBackground
+          : colorScheme.surface,
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: colorScheme.primary,
+        linearTrackColor: colorScheme.surfaceContainerHighest,
       ),
     );
   }

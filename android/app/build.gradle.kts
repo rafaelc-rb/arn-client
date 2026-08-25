@@ -17,23 +17,25 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "br.com.aranetprovedor.client"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"
+    // Segue a versão do NDK mantida pelo próprio Flutter SDK pelo mesmo
+    // motivo do targetSdk: evita ficar presa a um número desatualizado.
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
         applicationId = "br.com.aranetprovedor.client"
         minSdk = flutter.minSdkVersion
-        targetSdk = 35
-        versionCode = 3
-        versionName = "1.0.0"
+        // Segue o valor mantido pelo próprio Flutter SDK em vez de fixar um
+        // número, para que o app sempre segmente o nível de API mais recente
+        // suportado (exigência do Google Play) sem precisar de intervenção
+        // manual a cada novo release do Android.
+        targetSdk = flutter.targetSdkVersion
+        versionCode = 4
+        versionName = "1.0.1"
     }
 
     signingConfigs {
@@ -66,6 +68,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
 
