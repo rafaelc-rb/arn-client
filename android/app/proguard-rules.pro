@@ -1,39 +1,25 @@
-# Flutter wrapper
--keep class io.flutter.app.** { *; }
--keep class io.flutter.plugin.**  { *; }
--keep class io.flutter.util.**  { *; }
--keep class io.flutter.view.**  { *; }
--keep class io.flutter.**  { *; }
--keep class io.flutter.plugins.**  { *; }
--keep class io.flutter.embedding.** { *; }
+# O motor do Flutter e os plugins (io.flutter.**) já embarcam suas próprias
+# regras de consumidor do ProGuard/R8 dentro do .aar — não é necessário (nem
+# recomendado) repetir um "-keep" amplo para esses pacotes aqui. Um "-keep"
+# genérico como esse mantinha uma fatia enorme do app sem shrink/ofuscação/
+# otimização, sem necessidade real, prejudicando as métricas de qualidade
+# técnica do R8 no Play Console.
 
-# WebView
+# WebView: preserva a assinatura dos callbacks de WebViewClient, usados por
+# algumas implementações via reflexão.
 -keepclassmembers class * extends android.webkit.WebViewClient {
     public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
+    public void *(android.webkit.WebView, java.lang.String);
     public boolean *(android.webkit.WebView, java.lang.String);
 }
--keepclassmembers class * extends android.webkit.WebViewClient {
-    public void *(android.webkit.WebView, java.lang.String);
-}
 
-# MainActivity
--keep class br.com.aranetprovedor.client.MainActivity { *; }
-
-# Google Play Core (corrige erro R8)
--keep class com.google.android.play.core.** { *; }
--dontwarn com.google.android.play.core.**
-
-# Prevent R8 from leaving Data object members always null
--keepclassmembers,allowobfuscation class * {
-  @com.google.gson.annotations.SerializedName <fields>;
-}
-
-# Prevenir warnings
+# Suprime avisos de providers de TLS opcionais que aparecem como dependência
+# transitiva, mas não são usados em tempo de execução por este app.
 -dontwarn org.conscrypt.**
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**
 
-# Manter anotações
+# Preserva metadados úteis para stack traces legíveis em relatórios de erro.
 -keepattributes *Annotation*
 -keepattributes Signature
 -keepattributes InnerClasses

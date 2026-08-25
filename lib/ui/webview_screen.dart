@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../viewmodel/webview_viewmodel.dart';
@@ -59,31 +60,45 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!didPop) _handleBack();
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: ListenableBuilder(
-            listenable: _viewModel,
-            builder: (context, _) {
-              final vm = _viewModel;
-              return Stack(
-                children: [
-                  WebViewWidget(controller: _controller),
-                  if (vm.status == WebViewPageStatus.loading)
-                    WebViewLoadingBar(progress: vm.progress),
-                  if (vm.status == WebViewPageStatus.error)
-                    WebViewErrorView(
-                      message: vm.errorMessage,
-                      retriesExhausted: vm.retriesExhausted,
-                      onRetry: vm.retryNow,
-                    ),
-                ],
-              );
-            },
+    final theme = Theme.of(context);
+    // Com o layout ponta a ponta, a barra de status e a barra de navegação
+    // ficam sobre o conteúdo do app: os ícones do sistema precisam de
+    // contraste com o fundo de cada tema para continuarem legíveis.
+    final overlayStyle = theme.brightness == Brightness.dark
+        ? SystemUiOverlayStyle.light
+        : SystemUiOverlayStyle.dark;
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: overlayStyle.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: theme.scaffoldBackgroundColor,
+      ),
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) _handleBack();
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: ListenableBuilder(
+              listenable: _viewModel,
+              builder: (context, _) {
+                final vm = _viewModel;
+                return Stack(
+                  children: [
+                    WebViewWidget(controller: _controller),
+                    if (vm.status == WebViewPageStatus.loading)
+                      WebViewLoadingBar(progress: vm.progress),
+                    if (vm.status == WebViewPageStatus.error)
+                      WebViewErrorView(
+                        message: vm.errorMessage,
+                        retriesExhausted: vm.retriesExhausted,
+                        onRetry: vm.retryNow,
+                      ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

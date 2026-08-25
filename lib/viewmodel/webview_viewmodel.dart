@@ -85,6 +85,15 @@ class WebViewViewModel extends ChangeNotifier {
   }
 
   void onPageFinished(String url) {
+    // Quando a navegação principal falha (ex.: sem internet), o próprio
+    // WebView costuma navegar internamente para sua página nativa de erro
+    // (a interstitial "Webpage not available") e dispara onPageFinished
+    // para ela. Isso não é um carregamento bem-sucedido — se já estamos em
+    // estado de erro, só uma nova tentativa (onPageStarted) deve tirar a
+    // tela desse estado, senão a tela de erro própria do app seria
+    // encoberta pela página de erro nativa do WebView.
+    if (_status == WebViewPageStatus.error) return;
+
     _status = WebViewPageStatus.loaded;
     _progress = 100;
     _error = null;

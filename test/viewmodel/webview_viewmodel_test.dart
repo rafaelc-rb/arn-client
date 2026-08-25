@@ -57,10 +57,8 @@ void main() {
       expect(viewModel.status, WebViewPageStatus.loading);
     });
 
-    test('onPageFinished marca como loaded e zera retries e erro', () {
+    test('onPageFinished marca como loaded após um carregamento sem erro', () {
       final viewModel = _viewModel();
-      viewModel.onWebResourceError(_errorOf());
-      expect(viewModel.status, WebViewPageStatus.error);
 
       viewModel.onPageFinished(_url);
 
@@ -79,6 +77,19 @@ void main() {
       expect(viewModel.status, WebViewPageStatus.loading);
       expect(viewModel.progress, 0);
       expect(viewModel.error, isNull);
+    });
+
+    test('onPageFinished não sobrescreve um erro já registrado '
+        '(página nativa de erro do WebView terminando de carregar)', () {
+      final viewModel = _viewModel();
+      viewModel.onWebResourceError(
+        _errorOf(errorType: WebResourceErrorType.hostLookup),
+      );
+
+      viewModel.onPageFinished(_url);
+
+      expect(viewModel.status, WebViewPageStatus.error);
+      expect(viewModel.error, isNotNull);
     });
 
     test(

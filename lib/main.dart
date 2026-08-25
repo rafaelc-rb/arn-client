@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'theme/app_theme.dart';
 import 'ui/webview_screen.dart';
@@ -9,6 +10,13 @@ const String kRedirectUrl =
     'https://aranetgo.sgplocal.com.br/accounts/central/login';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Declara explicitamente o layout ponta a ponta: a partir do Android 15
+  // (API 35+) isso já é o padrão do sistema, mas fixar aqui deixa a
+  // intenção clara e garante o mesmo comportamento em versões anteriores do
+  // Android (o conteúdo continua protegido pelos SafeArea da tela).
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
   // Injeção de dependência simples para o ViewModel
   runApp(MainApp(viewModel: WebViewViewModel(kRedirectUrl)));
 }

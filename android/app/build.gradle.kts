@@ -34,8 +34,8 @@ android {
         // suportado (exigência do Google Play) sem precisar de intervenção
         // manual a cada novo release do Android.
         targetSdk = flutter.targetSdkVersion
-        versionCode = 4
-        versionName = "1.0.1"
+        versionCode = 6
+        versionName = "1.0.2"
     }
 
     signingConfigs {
